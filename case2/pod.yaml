@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: case2-1
+spec:
+  volumes:
+  - name: mem-alloc
+    hostPath:
+      path: /usr/local/bin/mem-alloc
+  containers:
+  - name: p1
+    image: busybox:1.36
+    command:
+    - /bin/sh
+    args: 
+    - -c
+    - exec mem-alloc 512 1
+    resources:
+      requests:
+        memory: 128M
+      limits:
+        memory: 3G
+    volumeMounts:
+    - mountPath: /bin/mem-alloc
+      name: mem-alloc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: case2-2
+spec:
+  volumes:
+  - name: mem-alloc
+    hostPath:
+      path: /usr/local/bin/mem-alloc
+  containers:
+  - name: p1
+    image: busybox:1.36
+    command:
+    - /bin/sh
+    args: 
+    - -c
+    - exec mem-alloc 768 3
+    resources:
+      requests:
+        memory: 128M
+      limits:
+        memory: 3G
+    volumeMounts:
+    - mountPath: /bin/mem-alloc
+      name: mem-alloc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: case2-3
+spec:
+  volumes:
+  - name: mem-alloc
+    hostPath:
+      path: /usr/local/bin/mem-alloc
+  containers:
+  - name: p1
+    image: busybox:1.36
+    command:
+    - /bin/sh
+    args: 
+    - -c
+    - exec mem-alloc 1024 6
+    resources:
+      requests:
+        memory: 128M
+      limits:
+        memory: 3G
+    volumeMounts:
+    - mountPath: /bin/mem-alloc
+      name: mem-alloc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: case2-4
+spec:
+  volumes:
+  - name: mem-alloc
+    hostPath:
+      path: /usr/local/bin/mem-alloc
+  containers:
+  - name: p1
+    image: busybox:1.36
+    command:
+    - /bin/sh
+    args: 
+    - -c
+    - exec mem-alloc 2048 10
+    resources:
+      requests:
+        memory: 128M
+      limits:
+        memory: 3G
+    volumeMounts:
+    - mountPath: /bin/mem-alloc
+      name: mem-alloc

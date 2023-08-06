@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: case1-4
+spec:
+  volumes:
+  - name: mem-alloc
+    hostPath:
+      path: /usr/local/bin/mem-alloc
+  containers:
+  - name: p1
+    image: busybox:1.36
+    command:
+    - /bin/sh
+    args: 
+    - -c
+    # - |
+    #   mem-alloc 500 1 &
+    #   exec mem-alloc 2000 5
+    - |
+      mem-alloc 500 5 &
+      exec mem-alloc 2000 1
+    resources:
+      requests:
+        memory: 1G
+      limits:
+        memory: 2G
+    volumeMounts:
+    - mountPath: /bin/mem-alloc
+      name: mem-alloc
+  - name: p2
+    image: busybox:1.36
+    command:
+      - /bin/sh
+    args: 
+      - -c
+      - sleep infinity
+    resources:
+      requests:
+        memory: 0.25G
+      limits:
+        memory: 0.5G
+    volumeMounts:
+    - mountPath: /bin/mem-alloc
+      name: mem-alloc

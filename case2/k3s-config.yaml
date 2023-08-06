@@ -1,0 +1,4 @@
+# https://docs.k3s.io/zh/installation/configuration#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6
+# https://docs.k3s.io/zh/cli/agent#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E5%BF%97
+# https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/reserve-compute-resources/#eviction-Thresholds
+kubelet-arg: "--eviction-hard=memory.available<12Gi"
